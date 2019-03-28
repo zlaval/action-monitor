@@ -1,0 +1,9 @@
+${AnsiColor.RED}                    _     _                     __  __                   _   _
+${AnsiColor.RED}     /\            | |   (_)                   |  \/  |                 (_) | |
+${AnsiColor.WHITE}    /  \      ___  | |_   _    ___    _ __     | \  / |   ___    _ __    _  | |_    ___    _ __
+${AnsiColor.WHITE}   / /\ \    / __| | __| | |  / _ \  | '_ \    | |\/| |  / _ \  | '_ \  | | | __|  / _ \  | '__|
+${AnsiColor.GREEN}  / ____ \  | (__  | |_  | | | (_) | | | | |   | |  | | | (_) | | | | | | | | |_  | (_) | | |
+${AnsiColor.GREEN} /_/    \_\  \___|  \__| |_|  \___/  |_| |_|   |_|  |_|  \___/  |_| |_| |_|  \__|  \___/  |_|
+
+${AnsiColor.YELLOW} Spring Boot ${spring-boot.formatted-version}
+${AnsiColor.BLUE} Created by Zed
