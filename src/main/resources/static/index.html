@@ -1,4 +1,5 @@
 <script src="stomp.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     function connect() {
         var socket = new WebSocket('ws://localhost:9570/websocket');
@@ -6,12 +7,20 @@
 
         ws.connect({}, function (frame) {
             ws.subscribe("/database-action", function (message) {
-                console.log(message)
+                console.log(message);
+                append(message);
             });
         }, function (error) {
             alert("STOMP error " + error);
         });
     }
 
+    function append(message) {
+        $(".content").append(message.body)
+    }
+
     connect()
 </script>
+<body>
+<div class="content"></div>
+</body>
