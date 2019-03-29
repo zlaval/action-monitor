@@ -3,6 +3,8 @@ package com.zlrx.actionmonitor.jms;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQConnectionFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.JmsListenerConfigurer;
@@ -15,6 +17,9 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class JmsListenerConfig implements JmsListenerConfigurer {
+
+    @Autowired
+    private JmsListener jmsListener;
 
     @Bean
     public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
@@ -32,6 +37,11 @@ public class JmsListenerConfig implements JmsListenerConfigurer {
         objectMapper.registerModule(javaTimeModule);
         messageConverter.setObjectMapper(objectMapper);
         return messageConverter;
+    }
+
+    @Bean
+    public ActiveMQConnectionFactoryCustomizer customizer() {
+        return factory -> factory.setTransportListener(jmsListener);
     }
 
     @Override
