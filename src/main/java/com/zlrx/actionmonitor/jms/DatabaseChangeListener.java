@@ -2,18 +2,22 @@ package com.zlrx.actionmonitor.jms;
 
 import com.zlrx.actionmonitor.model.DatabaseMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
 public class DatabaseChangeListener {
 
+    @Autowired
+    private SimpMessagingTemplate template;
 
     @JmsListener(destination = "database-change")
     public void receiveMessage(DatabaseMessage message) {
-        log.info(message.toString());
+        log.info("New message received {}", message);
+        template.convertAndSend("/database-action", message);
     }
-
 
 }

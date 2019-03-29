@@ -1,0 +1,17 @@
+<script src="stomp.min.js"></script>
+<script>
+    function connect() {
+        var socket = new WebSocket('ws://localhost:9570/websocket');
+        ws = Stomp.over(socket);
+
+        ws.connect({}, function (frame) {
+            ws.subscribe("/database-action", function (message) {
+                console.log(message)
+            });
+        }, function (error) {
+            alert("STOMP error " + error);
+        });
+    }
+
+    connect()
+</script>

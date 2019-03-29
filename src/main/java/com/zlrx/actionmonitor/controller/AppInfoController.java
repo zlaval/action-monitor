@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.PostConstruct;
 
 @RestController
-@RequestMapping("app-info")
+@RequestMapping("/api/v1/app-info")
 public class AppInfoController extends BaseController {
 
     @Value("${application.version}")
