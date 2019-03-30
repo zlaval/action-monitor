@@ -16,3 +16,6 @@ queue name hardcoded in the demo
 apidoc url:
 /v2/api-docs
 /swagger-ui.html
+
+
+db->mq connection not reset if mq restart

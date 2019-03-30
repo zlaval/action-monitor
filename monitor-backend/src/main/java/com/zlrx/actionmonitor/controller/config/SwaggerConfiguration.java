@@ -32,7 +32,7 @@ public class SwaggerConfiguration {
                 "Monitoring database events and send its to the connected clients",
                 "v1",
                 "None",
-                new Contact("Zalerix", "", ""),
+                new Contact("Zed", "", ""),
                 "Free",
                 "None",
                 new ArrayList<>());

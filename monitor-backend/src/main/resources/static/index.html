@@ -2,7 +2,9 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     function connect() {
-        var socket = new WebSocket('ws://localhost:9570/websocket');
+        var url = window.location.host;
+        var socketUrl = 'ws://' + url + '/websocket';
+        var socket = new WebSocket(socketUrl);
         ws = Stomp.over(socket);
 
         ws.connect({}, function (frame) {

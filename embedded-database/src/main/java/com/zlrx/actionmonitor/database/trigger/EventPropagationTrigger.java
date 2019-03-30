@@ -1,9 +1,9 @@
 package com.zlrx.actionmonitor.database.trigger;
 
-import com.zlrx.actionmonitor.common.exception.NoSuchValueException;
+import com.zlrx.actionmonitor.common.exception.TechnicalException;
 import com.zlrx.actionmonitor.common.model.DatabaseMessage;
 import com.zlrx.actionmonitor.common.type.DatabaseAction;
-import com.zlrx.actionmonitor.database.jms.JmsConnection;
+import com.zlrx.actionmonitor.database.jms.ChangeMessageProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.api.Trigger;
 
@@ -18,7 +18,7 @@ public class EventPropagationTrigger implements Trigger {
 
     private String tableName;
     private DatabaseAction action;
-    private JmsConnection jmsConnection = JmsConnection.getInstance();
+    private ChangeMessageProducer changeMessageProducer = ChangeMessageProducer.getInstance();
 
     @Override
     public void init(Connection conn, String schemaName, String triggerName, String tableName, boolean before, int type) throws SQLException {
@@ -37,7 +37,7 @@ public class EventPropagationTrigger implements Trigger {
 
     @Override
     public void close() throws SQLException {
-        jmsConnection.closeConnection();
+        changeMessageProducer.closeConnection();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class EventPropagationTrigger implements Trigger {
 
     private void sendMessage(DatabaseMessage message) {
         log.debug("send message to queue");
-        jmsConnection.sendMessage(message);
+        changeMessageProducer.sendMessage(message);
     }
 
     private DatabaseAction mapTypeToAction(int type) {
@@ -69,7 +69,7 @@ public class EventPropagationTrigger implements Trigger {
                 return dbAction;
             }
         }
-        throw new NoSuchValueException("Not found DatabaseAction with the given type " + type);
+        throw new TechnicalException("Not found DatabaseAction with the given type " + type);
     }
 
 }
