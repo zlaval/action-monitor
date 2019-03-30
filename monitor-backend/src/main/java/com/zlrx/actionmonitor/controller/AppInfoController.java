@@ -1,6 +1,8 @@
 package com.zlrx.actionmonitor.controller;
 
 import com.zlrx.actionmonitor.model.ApplicationInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 
+@Api("Application information")
 @RestController
 @RequestMapping("/api/v1/app-info")
-public class AppInfoController extends BaseController {
+public class AppInfoController {
 
     @Value("${application.version}")
     private String version;
@@ -30,7 +33,8 @@ public class AppInfoController extends BaseController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<ApplicationInfo> getVersionNumber() {
+    @ApiOperation(value = "Information about application", response = ApplicationInfo.class, tags = "App Info")
+    public ResponseEntity<ApplicationInfo> getApplicationInfo() {
         return new ResponseEntity<>(applicationInfo, HttpStatus.OK);
     }
 

@@ -14,9 +14,11 @@ import java.time.LocalDateTime;
 @Slf4j
 public class EventPropagationTrigger implements Trigger {
 
-    private JmsConnection jmsConnection = JmsConnection.getInstance();
-    private DatabaseAction action;
+    private static final int ID_COLUMN_INDEX = 0;
+
     private String tableName;
+    private DatabaseAction action;
+    private JmsConnection jmsConnection = JmsConnection.getInstance();
 
     @Override
     public void init(Connection conn, String schemaName, String triggerName, String tableName, boolean before, int type) throws SQLException {
@@ -28,7 +30,8 @@ public class EventPropagationTrigger implements Trigger {
     @Override
     public void fire(Connection conn, Object[] oldRow, Object[] newRow) throws SQLException {
         log.info("{} on {}", action, tableName);
-        DatabaseMessage message = createMessage();
+        Long id = getId(oldRow, newRow);
+        DatabaseMessage message = createMessage(id);
         sendMessage(message);
     }
 
@@ -42,15 +45,22 @@ public class EventPropagationTrigger implements Trigger {
 
     }
 
-    private DatabaseMessage createMessage() {
+    private Long getId(Object[] oldRow, Object[] newRow) {
+        if (action == DatabaseAction.INSERT) {
+            return (Long) newRow[ID_COLUMN_INDEX];
+        } else {
+            return (Long) oldRow[ID_COLUMN_INDEX];
+        }
+    }
+
+    private DatabaseMessage createMessage(Long id) {
         LocalDateTime actionTimestamp = LocalDateTime.now();
-        return new DatabaseMessage(tableName, action, actionTimestamp);
+        return new DatabaseMessage(id, tableName, action, actionTimestamp);
     }
 
     private void sendMessage(DatabaseMessage message) {
         log.debug("send message to queue");
         jmsConnection.sendMessage(message);
-
     }
 
     private DatabaseAction mapTypeToAction(int type) {

@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DatabaseMessage {
+    private Long rowId;
     private String tableName;
     private DatabaseAction action;
     private LocalDateTime timestamp;

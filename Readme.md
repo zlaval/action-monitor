@@ -11,3 +11,8 @@ jdbc:h2:~/appdb;AUTO_SERVER=TRUE
 sa/sa
 
 queue name hardcoded in the demo
+
+
+apidoc url:
+/v2/api-docs
+/swagger-ui.html
