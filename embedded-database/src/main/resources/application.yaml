@@ -1,0 +1,13 @@
+server:
+  port: 9580
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    url: 'jdbc:h2:~/appdb'
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  liquibase:
+    change-log: 'classpath:changelog.yaml'

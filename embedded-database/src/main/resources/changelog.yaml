@@ -1,0 +1,42 @@
+databaseChangeLog:
+- changeSet:
+    id: DB-1-20190330-1100-1
+    author: zed
+    changes:
+    - createTable:
+        tableName: person
+        columns:
+        - column:
+            name: id
+            type: bigint
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: firstname
+            type: varchar(50)
+        - column:
+            name: lastname
+            type: varchar(50)
+        - column:
+            name: age
+            type: int
+- changeSet:
+    id: DB-1-20190330-1500-1
+    author: zed
+    changes:
+    - sql:
+        sql: CREATE TRIGGER insert_event AFTER INSERT ON person FOR EACH ROW CALL "com.zlrx.actionmonitor.database.trigger.EventPropagationTrigger"
+- changeSet:
+    id: DB-1-20190330-1500-2
+    author: zed
+    changes:
+    - sql:
+        sql: CREATE TRIGGER update_event AFTER UPDATE ON person FOR EACH ROW CALL "com.zlrx.actionmonitor.database.trigger.EventPropagationTrigger"
+- changeSet:
+    id: DB-1-20190330-1500-3
+    author: zed
+    changes:
+    - sql:
+        sql: CREATE TRIGGER delete_event AFTER DELETE ON person FOR EACH ROW CALL "com.zlrx.actionmonitor.database.trigger.EventPropagationTrigger"

@@ -5,12 +5,14 @@
     <packaging>pom</packaging>
     <modules>
         <module>monitor-backend</module>
+        <module>embedded-database</module>
+        <module>monitor-common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.3.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.zlrx</groupId>
     <artifactId>action-monitor</artifactId>
@@ -22,5 +24,12 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
 </project>

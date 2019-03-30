@@ -1,6 +1,6 @@
-package com.zlrx.actionmonitor.model;
+package com.zlrx.actionmonitor.common.model;
 
-import com.zlrx.actionmonitor.type.DatabaseAction;
+import com.zlrx.actionmonitor.common.type.DatabaseAction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

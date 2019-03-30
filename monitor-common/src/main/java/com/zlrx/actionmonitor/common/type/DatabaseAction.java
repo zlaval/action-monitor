@@ -1,4 +1,4 @@
-package com.zlrx.actionmonitor.type;
+package com.zlrx.actionmonitor.common.type;
 
 public enum DatabaseAction {
     INSERT, UPDATE, DELETE

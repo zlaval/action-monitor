@@ -1,6 +1,6 @@
 package com.zlrx.actionmonitor.jms;
 
-import com.zlrx.actionmonitor.model.DatabaseMessage;
+import com.zlrx.actionmonitor.common.model.DatabaseMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
@@ -16,7 +16,7 @@ public class DatabaseChangeListener {
 
     @JmsListener(destination = "database-change")
     public void receiveMessage(DatabaseMessage message) {
-        log.info("New message received {}", message);
+        log.info("New message was received from the queue: {}", message);
         template.convertAndSend("/database-action", message);
     }
 
