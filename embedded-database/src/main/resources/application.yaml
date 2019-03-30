@@ -9,5 +9,7 @@ spring:
   h2:
     console:
       enabled: true
+      settings:
+        web-allow-others: true
   liquibase:
     change-log: 'classpath:changelog.yaml'
