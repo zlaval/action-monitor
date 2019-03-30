@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-public class JmsListener implements TransportListener {
+public class MqListener implements TransportListener {
 
     @Autowired
     private AmqHealthService healthService;

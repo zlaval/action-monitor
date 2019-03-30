@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 public class JmsListenerConfig implements JmsListenerConfigurer {
 
     @Autowired
-    private JmsListener jmsListener;
+    private MqListener mqListener;
 
     @Bean
     public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
@@ -41,7 +41,7 @@ public class JmsListenerConfig implements JmsListenerConfigurer {
 
     @Bean
     public ActiveMQConnectionFactoryCustomizer customizer() {
-        return factory -> factory.setTransportListener(jmsListener);
+        return factory -> factory.setTransportListener(mqListener);
     }
 
     @Override
