@@ -18,9 +18,6 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class JmsListenerConfig implements JmsListenerConfigurer {
 
-    @Autowired
-    private MqListener mqListener;
-
     @Bean
     public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
         DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
@@ -40,8 +37,8 @@ public class JmsListenerConfig implements JmsListenerConfigurer {
     }
 
     @Bean
-    public ActiveMQConnectionFactoryCustomizer customizer() {
-        return factory -> factory.setTransportListener(mqListener);
+    public ActiveMQConnectionFactoryCustomizer customizer(@Autowired JmsTransportListener jmsTransportListener) {
+        return factory -> factory.setTransportListener(jmsTransportListener);
     }
 
     @Override

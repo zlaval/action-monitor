@@ -17,7 +17,7 @@ public class DatabaseChangeListener {
     @JmsListener(destination = "database-change")
     public void receiveMessage(DatabaseMessage message) {
         log.info("New message was received from the queue: {}, broadcast it to the connected clients", message);
-        template.convertAndSend("/database-action", message);
+        template.convertAndSend("/topic/database-action", message);
     }
 
 }

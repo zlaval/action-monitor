@@ -8,12 +8,12 @@
         ws = Stomp.over(socket);
 
         ws.connect({}, function (frame) {
-            ws.subscribe("/database-action", function (message) {
+            ws.subscribe("/topic/database-action", function (message) {
                 console.log(message);
                 append(message);
             });
         }, function (error) {
-            alert("STOMP error " + error);
+            console.log("STOMP error " + error);
         });
     }
 
