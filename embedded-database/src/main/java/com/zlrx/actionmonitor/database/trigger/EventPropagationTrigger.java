@@ -3,6 +3,7 @@ package com.zlrx.actionmonitor.database.trigger;
 import com.zlrx.actionmonitor.common.exception.NoSuchValueException;
 import com.zlrx.actionmonitor.common.model.DatabaseMessage;
 import com.zlrx.actionmonitor.common.type.DatabaseAction;
+import com.zlrx.actionmonitor.database.jms.JmsConnection;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.api.Trigger;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class EventPropagationTrigger implements Trigger {
 
+    private JmsConnection jmsConnection = JmsConnection.getInstance();
     private DatabaseAction action;
     private String tableName;
 
@@ -32,7 +34,7 @@ public class EventPropagationTrigger implements Trigger {
 
     @Override
     public void close() throws SQLException {
-
+        jmsConnection.closeConnection();
     }
 
     @Override
@@ -47,6 +49,8 @@ public class EventPropagationTrigger implements Trigger {
 
     private void sendMessage(DatabaseMessage message) {
         log.debug("send message to queue");
+        jmsConnection.sendMessage(message);
+
     }
 
     private DatabaseAction mapTypeToAction(int type) {
