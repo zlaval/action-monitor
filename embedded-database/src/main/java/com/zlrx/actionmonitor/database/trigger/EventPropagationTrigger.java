@@ -42,7 +42,7 @@ public class EventPropagationTrigger implements Trigger {
 
     @Override
     public void remove() throws SQLException {
-
+        /*no action required*/
     }
 
     private Long getId(Object[] oldRow, Object[] newRow) {

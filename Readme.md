@@ -32,7 +32,7 @@ After image has been built, the
 command starts the container and expose all necessary ports.
 
 |Port number| Description|
-|:---------:|:----------:|
+|:---------:|:----------|
 |61616      |The TCP port of ActiveMQ, the application use it to connect the MQ |
 |8161       |The Admin Port of ActiveMq. `http://<docker-host>:8161/admin/queues.jsp`|
 |9570       |Port of the Action manager|
