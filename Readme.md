@@ -42,6 +42,8 @@ REST endpoints use Swagger to create api docs. The docs are available on the fol
 #### How to use
 
 ---
+> *Git, Maven and Docker must be installed*
+
 Easiest way to try out the application is to build and run the docker container.
 Application can also run from IDE or with `java -jar` command after maven `package` are completed, but
 in this case ActiveMQ listening on TCP port 61616 must be started on the local machine.
