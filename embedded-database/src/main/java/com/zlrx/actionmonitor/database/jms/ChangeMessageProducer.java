@@ -17,7 +17,9 @@ import javax.jms.TextMessage;
 @Slf4j
 public class ChangeMessageProducer {
 
+    private static final String QUEUE_ADDRESS = "tcp://localhost:61616";
     private static final String QUEUE_NAME = "database-change";
+
     private Connection connection;
     private ObjectSerializer objectSerializer;
 
@@ -35,7 +37,7 @@ public class ChangeMessageProducer {
     }
 
     private void establishConnection() {
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(QUEUE_ADDRESS);
         try {
             connection = connectionFactory.createConnection();
             connection.start();
@@ -69,7 +71,6 @@ public class ChangeMessageProducer {
             log.error("Cannot send jms message", e);
             throw new TechnicalException("Cannot send jms message", e);
         }
-
     }
 
 }

@@ -15,9 +15,9 @@ public class ObjectSerializer {
     private ObjectMapper objectMapper;
 
     public ObjectSerializer() {
-        objectMapper = new ObjectMapper();
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(new LocalDateTimeSerializer(DateTimeFormatter.ISO_DATE_TIME));
+        objectMapper = new ObjectMapper();
         objectMapper.registerModule(javaTimeModule);
     }
 
