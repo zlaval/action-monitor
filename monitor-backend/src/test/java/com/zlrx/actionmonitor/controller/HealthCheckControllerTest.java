@@ -1,7 +1,8 @@
 package com.zlrx.actionmonitor.controller;
 
+import com.zlrx.actionmonitor.model.Health;
 import com.zlrx.actionmonitor.service.AmqHealthService;
-import com.zlrx.actionmonitor.type.Health;
+import com.zlrx.actionmonitor.type.HealthType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,7 +32,7 @@ public class HealthCheckControllerTest {
         Health result = underTest.checkHealth();
 
         //then
-        assertEquals(Health.UP, result);
+        assertEquals(HealthType.UP, result.getHealth());
         verify(healthService, times(1)).isUp();
     }
 
@@ -44,7 +45,7 @@ public class HealthCheckControllerTest {
         Health result = underTest.checkHealth();
 
         //then
-        assertEquals(Health.MQ_DOWN, result);
+        assertEquals(HealthType.MQ_DOWN, result.getHealth());
         verify(healthService, times(1)).isUp();
     }
 

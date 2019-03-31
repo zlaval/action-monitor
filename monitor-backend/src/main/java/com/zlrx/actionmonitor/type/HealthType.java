@@ -1,5 +1,5 @@
 package com.zlrx.actionmonitor.type;
 
-public enum Health {
+public enum HealthType {
     UP, MQ_DOWN
 }
