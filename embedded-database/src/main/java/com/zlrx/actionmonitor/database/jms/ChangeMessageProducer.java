@@ -53,7 +53,7 @@ public class ChangeMessageProducer {
             connection.close();
             log.debug("Jms connection closed");
         } catch (JMSException e) {
-            log.trace("Cannot close jms connection, it maybe closed", e);
+            log.trace("Cannot close jms connection, it maybe already closed", e);
         }
     }
 

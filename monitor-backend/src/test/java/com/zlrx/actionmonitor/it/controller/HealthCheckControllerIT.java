@@ -32,7 +32,7 @@ public class HealthCheckControllerIT {
                 get("/api/v1/health")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.health").value(HealthType.MQ_DOWN.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.condition").value(HealthType.MQ_DOWN.toString()));
     }
 
 

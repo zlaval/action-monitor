@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Health {
-    private HealthType health;
+    private HealthType condition;
 }

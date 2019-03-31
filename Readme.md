@@ -73,7 +73,7 @@ command starts the container and expose all necessary ports.
 
 |Port number| Description|
 |:---------:|:----------|
-|61616      |The TCP port of ActiveMQ, use it to connect the MQ.|
+|61616      |The TCP port of ActiveMQ, use it to connect the MQ. Only for connection to AMQ|
 |8161       |The Admin Port of ActiveMQ. URL: `http://<docker-host>:8161/admin/queues.jsp`|
 |9570       |Port of the Action manager|
 |9580       |Port to H2's web console|
@@ -98,6 +98,8 @@ The application is covered with unit tests and some integration test for represe
 #### Known issues
 
 ---
+* If MQ is down, db actions will fail because of the thrown TechnicalException. This behaviour maybe not ok and should log the issue instead
+, depends on the exact requirements.
 * Queue name is hardcoded.
 * Embedded database module's properties (like MQ connection) are hardcoded.
 * Embedded database module not reset JMS connection after MQ restart.

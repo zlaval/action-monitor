@@ -32,7 +32,7 @@ public class HealthCheckControllerTest {
         Health result = underTest.checkHealth();
 
         //then
-        assertEquals(HealthType.UP, result.getHealth());
+        assertEquals(HealthType.UP, result.getCondition());
         verify(healthService, times(1)).isUp();
     }
 
@@ -45,7 +45,7 @@ public class HealthCheckControllerTest {
         Health result = underTest.checkHealth();
 
         //then
-        assertEquals(HealthType.MQ_DOWN, result.getHealth());
+        assertEquals(HealthType.MQ_DOWN, result.getCondition());
         verify(healthService, times(1)).isUp();
     }
 
