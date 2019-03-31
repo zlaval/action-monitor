@@ -1,5 +1,6 @@
 package com.zlrx.actionmonitor.database.trigger;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.zlrx.actionmonitor.common.exception.TechnicalException;
 import com.zlrx.actionmonitor.common.model.DatabaseMessage;
 import com.zlrx.actionmonitor.common.type.DatabaseAction;
@@ -18,7 +19,16 @@ public class EventPropagationTrigger implements Trigger {
 
     private String tableName;
     private DatabaseAction action;
-    private ChangeMessageProducer changeMessageProducer = ChangeMessageProducer.getInstance();
+    private ChangeMessageProducer changeMessageProducer;
+
+    public EventPropagationTrigger() {
+        changeMessageProducer = ChangeMessageProducer.getInstance();
+    }
+
+    @VisibleForTesting
+    EventPropagationTrigger(ChangeMessageProducer changeMessageProducer) {
+        this.changeMessageProducer = changeMessageProducer;
+    }
 
     @Override
     public void init(Connection conn, String schemaName, String triggerName, String tableName, boolean before, int type) throws SQLException {
