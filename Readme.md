@@ -1,5 +1,34 @@
 # Action manager
 
+#### Content
+
+---
+-[Description](#description)
+-[Architecture](#architecture)
+-[API Docs](#api docs)
+-[How to use](#how to use)
+-[Run integration tests](#run integration tests)
+-[Docker build](#docker build and run)
+-[Connect to H2](#connect to the h2 database running inside docker)
+-[Test](#test)
+-[Known issues](#known issues)
+
+#### Description
+
+---
+This application contains two runnable modules:
+* monitor-backend
+* embedded database
+
+Monitor backend module waits for JMS messages and broadcast them to the connected users over websocket.
+Embedded database module contains an H2 SQL Db - with a trigger on insert,update,delete - which send 
+the event into the MQ. 
+
+#### Architecture
+
+---
+![picture alt](https://github.com/zlaval/Diagrams/blob/master/architecture.png "diagram")
+
 #### API Docs
 
 ---
@@ -10,6 +39,14 @@ REST endpoints use Swagger to create api docs. The docs are available on the fol
 |/v2/api-docs|JSON format|
 |/swagger-ui.html|Swagger UI|
 
+#### How to use
+
+---
+Easiest way to try the application is to build and run the docker container.
+Application can run from IDE or with `java -jar` command after maven install, but
+in this case, ActiveMQ with TCP port 61616 must be started on the local machine.
+
+MQ requiered, install start etc
 
 
 #### Run integration tests
@@ -47,28 +84,19 @@ command starts the container and expose all necessary ports.
 >
 >user / password: sa /sa
 
+#### Test
+
+---
+The application is covered with unit tests, and some integration test for representation purpose.
 
 #### Known issues
 
 ---
-* Queue names are hardcoded
-* Embedded database module's properties (like MQ connection) are hardcoded
-* Embedded database module not reset JMS connection after MQ restart
-* E2E/ChaosMonkey etc tests are missing
+* Queue name is hardcoded.
+* Embedded database module's properties (like MQ connection) are hardcoded.
+* Embedded database module not reset JMS connection after MQ restart.
+* E2E/ChaosMonkey etc tests are missing.
 
-
-//TODO replace with doc
-
-notes:
-
-embedded-db: set up db, table and trigger
-/h2-console
-jdbc:h2:~/appdb;AUTO_SERVER=TRUE
-sa/sa
-
-test with some style
-it test not complet, some sample
-database project tests not written
 
 
 
