@@ -3,15 +3,15 @@
 #### Content
 
 ---
--[Description](#description)
--[Architecture](#architecture)
--[API Docs](#api docs)
--[How to use](#how to use)
--[Run integration tests](#run integration tests)
--[Docker build](#docker build and run)
--[Connect to H2](#connect to the h2 database running inside docker)
--[Test](#test)
--[Known issues](#known issues)
+- [Description](#description)
+- [Architecture](#architecture)
+- [API Docs](#api-docs)
+- [How to use](#how-to-use)
+- [Run integration tests](#run-integration-tests)
+- [Docker build](#docker-build-and-run)
+- [Connect to H2](#connect-to-the-h2-database-running-inside-docker)
+- [Test](#test)
+- [Known issues](#known-issues)
 
 #### Description
 
