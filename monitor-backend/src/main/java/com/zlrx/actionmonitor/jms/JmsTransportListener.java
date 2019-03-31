@@ -12,8 +12,12 @@ import java.io.IOException;
 @Component
 public class JmsTransportListener implements TransportListener {
 
-    @Autowired
     private AmqHealthService healthService;
+
+    @Autowired
+    public JmsTransportListener(AmqHealthService healthService) {
+        this.healthService = healthService;
+    }
 
     @Override
     public void onCommand(Object command) {
